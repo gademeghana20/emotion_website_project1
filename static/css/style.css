@@ -1,0 +1,157 @@
+/* ============ GENERAL ============ */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; padding:0; font-family: "Poppins", sans-serif; color:#fff; }
+
+/* ============ HOME PAGE ============ */
+.home-bg {
+  background: url('../images/bg.jpg') center center/cover no-repeat;
+  background-attachment: fixed;
+  min-height:100vh;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 30;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 28px;
+  background: rgba(0,0,0,0.55);
+}
+.logo { font-weight:700; font-size:1.1rem; }
+.nav-links { list-style:none; display:flex; gap:18px; margin:0; padding:0; align-items:center; }
+.nav-links a, .nav-links span { color:#fff; text-decoration:none; cursor:pointer; font-weight:500; }
+.dropdown { position:relative; }
+.dropdown-content {
+  position:absolute; right:0; top:36px;
+  display:none; background:rgba(0,0,0,0.85); padding:8px; border-radius:8px;
+}
+.dropdown:hover .dropdown-content { display:block; }
+.dropdown-content a { display:block; padding:8px 12px; color:#fff; text-decoration:none; }
+.dropdown-content a:hover { background:#333; }
+
+/* HERO */
+.hero { display:flex; align-items:center; justify-content:center; min-height:100vh; padding-top:60px; }
+.hero-box { background: rgba(0,0,0,0.45); padding:36px; border-radius:12px; width:90%; max-width:880px; text-align:center; }
+.hero-box h1 { margin:0 0 12px; font-size:2.1rem; }
+.hero-box .tag { color:#e6e6e6; margin-bottom:18px; }
+.search-form { display:flex; justify-content:center; gap:12px; }
+.search-form input { padding:12px 14px; border-radius:10px; border:none; width:320px; font-size:16px; }
+.search-form button { padding:12px 18px; border-radius:10px; border:none; background:#ffcc00; color:#222; font-weight:700; cursor:pointer; }
+
+/* INFO SECTIONS (hidden by default) */
+.info-section { display:none; background:rgba(0,0,0,0.6); margin:28px auto; padding:20px; width:85%; border-radius:12px; }
+
+/* when removing hidden (JS) show) */
+.info-section:not(.hidden) { display:block; }
+
+/* ============ RESULT PAGE ============ */
+.result-page { height:100%; overflow:hidden; background:#000; }
+
+/* Video full screen */
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  z-index: 1;
+  filter: brightness(0.55);
+}
+
+/* overlay content on top */
+.overlay {
+  position: relative;
+  z-index: 5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:8vh;
+  text-align:center;
+}
+
+/* corner controls */
+.corner-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display:flex;
+  gap:10px;
+}
+.corner-controls button {
+  background:#ffcc00; color:#111; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:700;
+}
+
+/* quote window (center area) */
+.quote-window {
+  width: 75%;
+  max-width: 1000px;
+  height: 40vh; /* visible window height */
+  overflow: hidden;
+  margin-top: 28px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:6;
+}
+
+/* track that scrolls upward */
+.quote-track {
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  align-items:center;
+  animation: scrollUp 20s linear infinite;
+  will-change: transform;
+}
+
+/* each quote */
+.quote {
+  font-size:1.4rem;
+  margin:0;
+  padding:8px 24px;
+  background: rgba(0,0,0,0.35);
+  border-radius:8px;
+  max-width: 90%;
+}
+
+/* make animation pauseable via JS by changing animation-play-state */
+@keyframes scrollUp {
+  0%   { transform: translateY(0%); }
+  50%  { transform: translateY(-50%); }
+  100% { transform: translateY(-100%); }
+}
+
+/* responsive */
+@media (max-width:700px) {
+  .hero-box h1 { font-size:1.5rem; }
+  .quote { font-size:1rem; }
+  .search-form input { width:200px; }
+}
+
+/* ===== CLICK TIP (Bottom Music Prompt) ===== */
+#click-tip {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 1.2em;
+  padding: 12px 0;
+  z-index: 9999;
+  cursor: pointer;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  transition: opacity 0.5s ease; /* optional fade-out animation */
+}
+
+/* When hidden (after click) */
+#click-tip.hidden {
+  opacity: 0;
+  pointer-events: none;
+}

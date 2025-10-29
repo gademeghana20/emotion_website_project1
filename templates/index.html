@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Emotion Explorer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="home-bg">
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">Emotion Explorer</div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showSection('about-me')">About Me</a></li>
+      <li><a href="#" onclick="showSection('about-site')">About Website</a></li>
+      <li class="dropdown">
+        <span>Articles ▾</span>
+        <div class="dropdown-content">
+          <a href="#" onclick="submitEmotion('happy')">Happy</a>
+          <a href="#" onclick="submitEmotion('sad')">Sad</a>
+          <a href="#" onclick="submitEmotion('angry')">Angry</a>
+          <a href="#" onclick="submitEmotion('excited')">Excited</a>
+          <a href="#" onclick="submitEmotion('relaxed')">Relaxed</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO / SEARCH -->
+  <main class="hero">
+    <div class="hero-box">
+      <h1>Discover Music & Quotes That Match Your Mood</h1>
+      <p class="tag">Type how you feel and experience matching visuals, music, and scrolling quotes.</p>
+
+      <form id="emotionForm" action="/emotion" method="post" class="search-form">
+        <input name="emotion" id="emotionInput" type="text" placeholder="Type an emotion (e.g., happy)" required>
+        <button type="submit">Explore</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Hidden info sections -->
+  <section id="about-me" class="info-section hidden">
+    <h2>About Me</h2>
+    <p>Hey! I'm Meghana — a student passionate about blending emotions, creativity, and technology. This website connects feelings with sound, visuals, and words.</p>
+  </section>
+
+  <section id="about-site" class="info-section hidden">
+    <h2>About This Website</h2>
+    <p>Enter an emotion to experience a full-screen background video, matching music, and quotes that bring your mood to life.</p>
+  </section>
+
+  <script>
+    function showSection(id){
+      // hide both then show requested
+      document.getElementById('about-me').classList.add('hidden');
+      document.getElementById('about-site').classList.add('hidden');
+      document.getElementById(id).classList.remove('hidden');
+      // scroll to it
+      document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    }
+
+    // helper used by dropdown articles to submit form quickly
+    function submitEmotion(em) {
+      const form = document.getElementById('emotionForm');
+      const input = document.getElementById('emotionInput');
+      input.value = em;
+      form.submit();
+    }
+  </script>
+</body>
+</html>
+
